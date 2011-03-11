@@ -9,13 +9,20 @@
 #import "MLBase.h"
 
 #import <objc/runtime.h>
+#import <sqlite3.h>
 
 #import "MLColumn.h"
+#import "MLDatabase.h"
 
 @interface MLBase()
 
++ (MLDatabase *)database;
 + (void)evaluateQuery:(NSString *)queryString withBlock:(void (^)(MLBase *obj))block;
 + (void)injectColumnProperties:(NSArray *)columns;
+
+- (BOOL)createOrUpdate;
+- (BOOL)update;
+- (BOOL)create;
 
 @end
 
@@ -26,46 +33,30 @@
 
 #pragma mark Config/setup
 
-// TODO: Attach hash to class to map class names to databases?
-static sqlite3 *database = NULL;
+// Hash to map class names to their respective databases
+static NSMutableDictionary *databaseMapping = nil;
 
-+ (BOOL)setDatabasePath:(NSString *)pathToDatabase
++ (void)initialize
 {
-    static NSMutableDictionary *databaseMapping = nil;
-    
-    if (databaseMapping == nil)
-    {
-        databaseMapping = [[NSMutableDictionary alloc] initWithCapacity:3];
-    }
-    
+    databaseMapping = [[NSMutableDictionary alloc] initWithCapacity:3];
+}
+
++ (void)setDatabase:(MLDatabase *)aDatabase
+{
     NSString *className = NSStringFromClass(self);
-    NSString *databasePath = [databaseMapping objectForKey:className];
+    MLDatabase *mappedDatabaseForClass = [databaseMapping objectForKey:className];
     
-    if (![pathToDatabase isEqualToString:databasePath])
+    if (![mappedDatabaseForClass isEqual:aDatabase])
     {
-        // Clear out the old path and database
-        [databasePath release];
-        databasePath = nil;
-        
-        if (database != NULL)
-        {
-            sqlite3_close(database);
-            database = NULL;
-        }
-        
-        // Init database
-        if(sqlite3_open([pathToDatabase UTF8String], &database) != SQLITE_OK)
-        {
-            NSLog(@"Failed to open database at '%@'", pathToDatabase);
-            return NO;
-        }
-        
-        databasePath = [pathToDatabase copy];
-        return YES;
+        [databaseMapping setObject:aDatabase forKey:className];
     }
-    
-    // Harmless no-op if database path hasn't changed
-    return YES;
+}
+
+// TODO: Support attaching to super's database
++ (MLDatabase *)database
+{
+    NSString *className = NSStringFromClass(self);
+    return [databaseMapping objectForKey:className];
 }
 
 + (NSString *)tableName
@@ -77,15 +68,15 @@ static sqlite3 *database = NULL;
 // TODO: Better way to keep track of columns per class?
 + (NSArray *)columns
 {
-    static NSMutableDictionary *columnsMapping = nil;
+    static NSMutableDictionary *columnMapping = nil;
     
-    if (columnsMapping == nil)
+    if (columnMapping == nil)
     {
-        columnsMapping = [[NSMutableDictionary alloc] initWithCapacity:5];
+        columnMapping = [[NSMutableDictionary alloc] initWithCapacity:5];
     }
     
     // Check if we've already cached the columns for this table
-    NSArray *cachedColumns = [columnsMapping valueForKey:[self tableName]];
+    NSArray *cachedColumns = [columnMapping valueForKey:[self tableName]];
     if (cachedColumns != nil)
     {
         return cachedColumns;
@@ -96,12 +87,10 @@ static sqlite3 *database = NULL;
     NSString *schemaQuery = [NSString stringWithFormat:@"PRAGMA table_info(\"%@\")", [self tableName]];
     
     sqlite3_stmt *queryStatement = NULL;
-    if (sqlite3_prepare(database, [schemaQuery UTF8String], -1, &queryStatement, NULL) == SQLITE_OK)
+    if (sqlite3_prepare([self database].database, [schemaQuery UTF8String], -1, &queryStatement, NULL) == SQLITE_OK)
     {
         while (sqlite3_step(queryStatement) == SQLITE_ROW)
         {
-            NSLog(@"We found a column!");
-            
             // Extract the column's metadata
             // cid|name|type|notnull|dflt_value|pk
             NSInteger columnId = sqlite3_column_int(queryStatement, 0);
@@ -136,7 +125,7 @@ static sqlite3 *database = NULL;
     }
     
     // Cache the columns
-    [columnsMapping setObject:columns forKey:[self tableName]];
+    [columnMapping setObject:columns forKey:[self tableName]];
     
     return columns;
 }
@@ -250,13 +239,14 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
     }
     
     sqlite3_stmt *queryStatement = NULL;
-    if (sqlite3_prepare_v2(database, [queryString UTF8String], -1, &queryStatement, NULL) == SQLITE_OK)
+    if (sqlite3_prepare_v2([self database].database, [queryString UTF8String], -1, &queryStatement, NULL) == SQLITE_OK)
     {
         int i = 0;
         
         NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
         
-        while (sqlite3_step(queryStatement) == SQLITE_ROW)
+        int result = 0;
+        while ((result = sqlite3_step(queryStatement)) == SQLITE_ROW)
         {
             [attributes removeAllObjects];
             
@@ -303,7 +293,12 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
 }
 
 
-#pragma mark -
+#pragma mark - Object Lifecycle
+
+- (id)init
+{
+    return [self initWithAttributes:nil];
+}
 
 - (id)initWithAttributes:(NSDictionary *)newAttributes
 {
@@ -312,6 +307,9 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
     if (self)
     {
         attributes = [[NSMutableDictionary alloc] initWithDictionary:newAttributes];
+        
+        //!!! TEMP
+        isNewRecord = YES;
     }
     
     return self;
@@ -322,6 +320,77 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
     [attributes release];
     
     [super dealloc];
+}
+
+
+#pragma mark -
+
+- (BOOL)save
+{
+    return [self createOrUpdate];
+}
+
+- (BOOL)createOrUpdate
+{
+    return (isNewRecord) ? [self create] : [self update];
+}
+
+- (BOOL)update
+{
+    return YES;  // TODO: Return the number of affected rows
+}
+
+- (BOOL)create
+{
+    // Build the SQL query
+    NSMutableString *insertQueryString = [NSMutableString stringWithFormat:@"INSERT INTO \"%@\"(",
+                                          [[self class] tableName]];
+    
+    NSString *columnNames = [[[[self class] columns] valueForKey:@"name"] componentsJoinedByString:@","];
+    [insertQueryString appendFormat:@"%@) VALUES(", columnNames];
+    
+    NSArray *columns = [[self class] columns];
+    for (int i = 0; i < columns.count; ++i)
+    {
+        MLColumn *column = [columns objectAtIndex:i];
+        
+        id value = [attributes valueForKey:column.name];
+        
+        if (value == nil)
+        {
+            value = @"NULL";
+        }
+        else
+        {
+            if (![value isKindOfClass:[NSString class]])
+            {
+                // TODO: Support blobs
+                value = [value stringValue];
+            }
+            
+            value = [NSString stringWithFormat:@"\"%@\"", value];
+        }
+        
+        [insertQueryString appendString:value];
+        
+        if (i < columns.count - 1)
+        {
+            [insertQueryString appendString:@","];
+        }
+        else
+        {
+            [insertQueryString appendString:@")"];
+        }
+    }
+    
+    // Fire the query
+    [[self class] evaluateQuery:insertQueryString withBlock:^(MLBase *obj) {
+        NSLog(@"Something worked...??"); 
+    }];
+    
+    isNewRecord = NO;
+    
+    return YES;  // TODO: Return new record's ID
 }
 
 @end
