@@ -14,9 +14,13 @@
 @interface MLBase : NSObject {
 @private
     NSMutableDictionary *attributes;
+    NSMutableDictionary *changedAttributes;
     
-    BOOL isNewRecord;
+    BOOL newRecord;
 }
+
+@property (nonatomic, retain) NSNumber *id;
+@property (nonatomic, assign, getter = isNewRecord) BOOL newRecord;
 
 /*!
  @methodgroup Configuration and setup
