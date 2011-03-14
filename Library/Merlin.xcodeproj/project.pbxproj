@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D31D67B7132E800C00711952 /* NSString+MerlinAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = D31D67B5132E800C00711952 /* NSString+MerlinAdditions.h */; };
+		D31D67B8132E800C00711952 /* NSString+MerlinAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D31D67B6132E800C00711952 /* NSString+MerlinAdditions.m */; };
+		D31D67BC132E817600711952 /* StringTests.h in Headers */ = {isa = PBXBuildFile; fileRef = D31D67BA132E817600711952 /* StringTests.h */; };
+		D31D67BE132E820700711952 /* NSString+MerlinAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D31D67B6132E800C00711952 /* NSString+MerlinAdditions.m */; };
+		D31D67BF132E82C900711952 /* StringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D31D67BB132E817600711952 /* StringTests.m */; };
 		D3BFF273132A89E800ABDAF3 /* MLDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = D3BFF271132A89E800ABDAF3 /* MLDatabase.h */; };
 		D3BFF274132A89E800ABDAF3 /* MLDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BFF272132A89E800ABDAF3 /* MLDatabase.m */; };
 		D3C3E364132967060069406B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C3E363132967060069406B /* Foundation.framework */; };
@@ -34,6 +39,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D31D67B5132E800C00711952 /* NSString+MerlinAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MerlinAdditions.h"; sourceTree = "<group>"; };
+		D31D67B6132E800C00711952 /* NSString+MerlinAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MerlinAdditions.m"; sourceTree = "<group>"; };
+		D31D67BA132E817600711952 /* StringTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringTests.h; sourceTree = "<group>"; };
+		D31D67BB132E817600711952 /* StringTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringTests.m; sourceTree = "<group>"; };
 		D3BFF271132A89E800ABDAF3 /* MLDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLDatabase.h; sourceTree = "<group>"; };
 		D3BFF272132A89E800ABDAF3 /* MLDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLDatabase.m; sourceTree = "<group>"; };
 		D3C3E360132967060069406B /* libMerlin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMerlin.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,6 +124,8 @@
 				D3BFF272132A89E800ABDAF3 /* MLDatabase.m */,
 				D3C3E38D13297DB20069406B /* MLColumn.h */,
 				D3C3E38E13297DB20069406B /* MLColumn.m */,
+				D31D67B5132E800C00711952 /* NSString+MerlinAdditions.h */,
+				D31D67B6132E800C00711952 /* NSString+MerlinAdditions.m */,
 			);
 			path = Merlin;
 			sourceTree = "<group>";
@@ -132,6 +143,8 @@
 			children = (
 				D3C3E37D132967060069406B /* MerlinTests.h */,
 				D3C3E37F132967060069406B /* MerlinTests.m */,
+				D31D67BA132E817600711952 /* StringTests.h */,
+				D31D67BB132E817600711952 /* StringTests.m */,
 				D3C3E377132967060069406B /* Supporting Files */,
 			);
 			path = MerlinTests;
@@ -157,6 +170,8 @@
 				D3C3E38B1329672F0069406B /* MLBase.h in Headers */,
 				D3C3E38F13297DB20069406B /* MLColumn.h in Headers */,
 				D3BFF273132A89E800ABDAF3 /* MLDatabase.h in Headers */,
+				D31D67B7132E800C00711952 /* NSString+MerlinAdditions.h in Headers */,
+				D31D67BC132E817600711952 /* StringTests.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +276,7 @@
 				D3C3E38C1329672F0069406B /* MLBase.m in Sources */,
 				D3C3E39013297DB20069406B /* MLColumn.m in Sources */,
 				D3BFF274132A89E800ABDAF3 /* MLDatabase.m in Sources */,
+				D31D67B8132E800C00711952 /* NSString+MerlinAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +285,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3C3E380132967060069406B /* MerlinTests.m in Sources */,
+				D31D67BE132E820700711952 /* NSString+MerlinAdditions.m in Sources */,
+				D31D67BF132E82C900711952 /* StringTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

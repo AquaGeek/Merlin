@@ -5,7 +5,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <sqlite3.h>
+@class MLDatabase;
 
 /*!
  @class MLBase
@@ -14,19 +14,24 @@
 @interface MLBase : NSObject {
 @private
     NSMutableDictionary *attributes;
+    NSMutableDictionary *changedAttributes;
+    
+    BOOL newRecord;
 }
+
+@property (nonatomic, retain) NSNumber *id;
+@property (nonatomic, assign, getter = isNewRecord) BOOL newRecord;
 
 /*!
  @methodgroup Configuration and setup
  */
 
 /*!
- @method setDatabasePath:
- @abstract Sets the class-wide SQLite database to the file at the given path.
- @param pathToDatabase The full path to the database file on disk.
- @result Returns YES if the database was successfully opened or NO on error.
+ @method setDatabase:
+ @abstract Sets the class-wide SQLite database.
+ @param aDatabase The initialized MLDatabase object to use for this class.
  */
-+ (BOOL)setDatabasePath:(NSString *)pathToDatabase;
++ (void)setDatabase:(MLDatabase *)aDatabase;
 
 /*!
  @method tableName
@@ -75,5 +80,7 @@
  @methodgroup None
  */
 - (id)initWithAttributes:(NSDictionary *)newAttributes;
+
+- (BOOL)save;
 
 @end
