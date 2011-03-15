@@ -1,8 +1,8 @@
 ## Introduction
 
-The goal of Merlin is to create a very lightweight Objective-C database abstraction layer for iOS and Mac OS X. It is inspired by and modeled after Rails' {ActiveRecord}[https://github.com/rails/rails/active_record].
+The goal of Merlin is to create a very lightweight Objective-C database abstraction layer for iOS and Mac OS X. It is inspired by and modeled after Rails' [ActiveRecord](https://github.com/rails/rails/active_record).
 
-The project follows Vincent Driessen's {Git branching model}[http://nvie.com/posts/a-successful-git-branching-model/]. Because it is still in the early phases, you will probably want to explore the {develop}[https://github.com/AKQADC/Merlin/tree/develop] branch for the latest and greatest "edge" features.
+The project follows Vincent Driessen's [Git branching model](http://nvie.com/posts/a-successful-git-branching-model). Because it is still in the early phases, you will probably want to explore the [develop](https://github.com/AKQADC/Merlin/tree/develop) branch for the latest and greatest "edge" features.
 
 ## Project layout
 
@@ -10,7 +10,7 @@ The code for the static library is found in the Library folder. Documentation an
 
 ## How it works
 
-{MLBase}[https://github.com/AKQADC/Merlin/blob/develop/Library/Merlin/MLBase.m] is an abstract superclass for database models. When rows are fetched from the database, each column is read into the 'attributes' dictionary. Additionally, MLBase includes some introspection code to automatically add getter and setter methods for each column in your table's schema to your subclass. This allows you to do things like:
+[MLBase](https://github.com/AKQADC/Merlin/blob/develop/Library/Merlin/MLBase.m) is an abstract superclass for database models. When rows are fetched from the database, each column is read into the 'attributes' dictionary. Additionally, MLBase includes some introspection code to automatically add getter and setter methods for each column in your table's schema to your subclass. This allows you to do things like:
 
     person = [Person first];
     [person setLastName:@"Anderson"];
