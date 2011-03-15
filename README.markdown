@@ -60,15 +60,15 @@ In lieu of just adding a pre-built database file to your project, you can also h
 1. Open your project's build rules. Click "Add Build Rule." Select "Source files with names matching:" from the "Process" drop-down and enter *.sql in the text field. Select "Custom script:" from the "Using" drop-down and enter:
 
     `# Adapted from http://tom.wilcoxen.org/2008/11/28/build-and-compile-your-sqlite-database-with-xcode/
-    # Remove the old built db
-    cd "${TARGET_BUILD_DIR}"
-    if [ -f ${INPUT_FILE_BASE}.db ];
-    then
-    rm ${INPUT_FILE_BASE}.db;
-    fi
+    `# Remove the old built db`
+    `cd "${TARGET_BUILD_DIR}"`
+    `if [ -f ${INPUT_FILE_BASE}.db ];`
+    `then`
+    `rm ${INPUT_FILE_BASE}.db;`
+    `fi`
     
-    # Build the new one
-    cat "${INPUT_FILE_PATH}" | sqlite3 ${INPUT_FILE_BASE}.db`
+    `# Build the new one`
+    `cat "${INPUT_FILE_PATH}" | sqlite3 ${INPUT_FILE_BASE}.db`
 
 Now, whenever you build your project, a fresh database will be generated and added to your app's resources.
 
