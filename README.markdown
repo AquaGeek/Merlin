@@ -44,7 +44,7 @@ To silence the compiler warnings, you can add dynamic properties to your class -
 
 Add Merlin to your project as a Git submodule:
 
-    `git submodule add git://github.com/AKQADC/Merlin.git`
+    git submodule add git://github.com/AKQADC/Merlin.git
 
 Add your SQLite database file to your project.
 
