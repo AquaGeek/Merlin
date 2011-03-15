@@ -1,12 +1,12 @@
 ## Introduction
 
-The goal of Merlin is to create a very lightweight Objective-C database abstraction layer for iOS and Mac OS X. It is inspired by and modeled after Rails' [ActiveRecord](https://github.com/rails/rails/active_record).
+The goal of Merlin is to create a very lightweight Objective-C database abstraction layer for iOS and Mac OS X. It is inspired by and modeled after Rails' [ActiveRecord](https://github.com/rails/rails/tree/master/activerecord).
 
 The project follows Vincent Driessen's [Git branching model](http://nvie.com/posts/a-successful-git-branching-model). Because it is still in the early phases, you will probably want to explore the [develop](https://github.com/AKQADC/Merlin/tree/develop) branch for the latest and greatest "edge" features.
 
 ## Project layout
 
-The code for the static library is found in the Library folder. Documentation and an example Xcode project will eventually be added to the root level as well.
+The code for the static library is found in the `Library` folder. Documentation and an example Xcode project will eventually be added to the root level as well.
 
 ## How it works
 
@@ -55,11 +55,11 @@ In lieu of just adding a pre-built database file to your project, you can also h
 
 1. Add a file to your project with a '.sql' extension that contains the necessary SQL to generate your models' tables:
 
-    CREATE TABLE people(id INTEGER PRIMARY KEY AUTOINCREMENT, firstName TEXT NOT NULL, lastName TEXT NOT NULL, email TEXT);
+    `CREATE TABLE people(id INTEGER PRIMARY KEY AUTOINCREMENT, firstName TEXT NOT NULL, lastName TEXT NOT NULL, email TEXT);`
 
 1. Open your project's build rules. Click "Add Build Rule." Select "Source files with names matching:" from the "Process" drop-down and enter *.sql in the text field. Select "Custom script:" from the "Using" drop-down and enter:
 
-    # Adapted from http://tom.wilcoxen.org/2008/11/28/build-and-compile-your-sqlite-database-with-xcode/
+    `# Adapted from http://tom.wilcoxen.org/2008/11/28/build-and-compile-your-sqlite-database-with-xcode/
     # Remove the old built db
     cd "${TARGET_BUILD_DIR}"
     if [ -f ${INPUT_FILE_BASE}.db ];
@@ -68,7 +68,7 @@ In lieu of just adding a pre-built database file to your project, you can also h
     fi
     
     # Build the new one
-    cat "${INPUT_FILE_PATH}" | sqlite3 ${INPUT_FILE_BASE}.db
+    cat "${INPUT_FILE_PATH}" | sqlite3 ${INPUT_FILE_BASE}.db`
 
 Now, whenever you build your project, a fresh database will be generated and added to your app's resources.
 
