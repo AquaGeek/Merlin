@@ -59,7 +59,7 @@ In lieu of just adding a pre-built database file to your project, you can also h
 
 1. Open your project's build rules. Click "Add Build Rule." Select "Source files with names matching:" from the "Process" drop-down and enter *.sql in the text field. Select "Custom script:" from the "Using" drop-down and enter:
 
-    `# Adapted from http://tom.wilcoxen.org/2008/11/28/build-and-compile-your-sqlite-database-with-xcode/
+    `# Adapted from http://tom.wilcoxen.org/2008/11/28/build-and-compile-your-sqlite-database-with-xcode/`
     `# Remove the old built db`
     `cd "${TARGET_BUILD_DIR}"`
     `if [ -f ${INPUT_FILE_BASE}.db ];`
