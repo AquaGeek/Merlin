@@ -27,7 +27,7 @@
 
 - (void)testExample
 {
-    STFail(@"Unit tests are not implemented yet in MerlinTests");
+    //TODO: Create Merlin Unit Tests
 }
 
 @end
