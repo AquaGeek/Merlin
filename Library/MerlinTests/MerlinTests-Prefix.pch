@@ -1,7 +1,0 @@
-//
-// Prefix header for all source files of the 'MerlinTests' target in the 'MerlinTests' project
-//
-
-#ifdef __OBJC__
-    #import <UIKit/UIKit.h>
-#endif
