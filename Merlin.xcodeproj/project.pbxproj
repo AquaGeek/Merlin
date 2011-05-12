@@ -427,6 +427,61 @@
 			};
 			name = Release;
 		};
+		F3EC0001137BA2C80068D7CC /* Adhoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Adhoc;
+		};
+		F3EC0002137BA2C80068D7CC /* Adhoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DSTROOT = /tmp/Merlin.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Merlin/Merlin-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv6 armv7 i386";
+			};
+			name = Adhoc;
+		};
+		F3EC0003137BA2C80068D7CC /* Adhoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MerlinTests/MerlinTests-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INFOPLIST_FILE = "MerlinTests/MerlinTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Adhoc;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -434,6 +489,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				40564FE0135E2E9E00CB3A7D /* Debug */,
+				F3EC0001137BA2C80068D7CC /* Adhoc */,
 				40564FE1135E2E9E00CB3A7D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -443,6 +499,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				40564FE3135E2E9E00CB3A7D /* Debug */,
+				F3EC0002137BA2C80068D7CC /* Adhoc */,
 				40564FE4135E2E9E00CB3A7D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -452,6 +509,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				40564FE6135E2E9E00CB3A7D /* Debug */,
+				F3EC0003137BA2C80068D7CC /* Adhoc */,
 				40564FE7135E2E9E00CB3A7D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
