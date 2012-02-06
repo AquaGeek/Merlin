@@ -1,0 +1,644 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		40564FC3135E2E9E00CB3A7D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40564FC2135E2E9E00CB3A7D /* Foundation.framework */; };
+		40564FCE135E2E9E00CB3A7D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40564FCD135E2E9E00CB3A7D /* UIKit.framework */; };
+		40564FCF135E2E9E00CB3A7D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40564FC2135E2E9E00CB3A7D /* Foundation.framework */; };
+		40564FD1135E2E9E00CB3A7D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40564FD0135E2E9E00CB3A7D /* CoreGraphics.framework */; };
+		40564FD4135E2E9E00CB3A7D /* libMerlin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 40564FBF135E2E9E00CB3A7D /* libMerlin.a */; };
+		40564FDA135E2E9E00CB3A7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 40564FD8135E2E9E00CB3A7D /* InfoPlist.strings */; };
+		40564FF0135E2EB100CB3A7D /* MLBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 40564FE8135E2EB100CB3A7D /* MLBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		40564FF1135E2EB100CB3A7D /* MLBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 40564FE9135E2EB100CB3A7D /* MLBase.m */; };
+		40564FF2135E2EB100CB3A7D /* MLColumn.h in Headers */ = {isa = PBXBuildFile; fileRef = 40564FEA135E2EB100CB3A7D /* MLColumn.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		40564FF3135E2EB100CB3A7D /* MLColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = 40564FEB135E2EB100CB3A7D /* MLColumn.m */; };
+		40564FF4135E2EB100CB3A7D /* MLDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = 40564FEC135E2EB100CB3A7D /* MLDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		40564FF5135E2EB100CB3A7D /* MLDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 40564FED135E2EB100CB3A7D /* MLDatabase.m */; };
+		40564FF6135E2EB100CB3A7D /* NSString+MerlinAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 40564FEE135E2EB100CB3A7D /* NSString+MerlinAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		40564FF7135E2EB100CB3A7D /* NSString+MerlinAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 40564FEF135E2EB100CB3A7D /* NSString+MerlinAdditions.m */; };
+		40564FFC135E2EF700CB3A7D /* MerlinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 40564FF9135E2EF700CB3A7D /* MerlinTests.m */; };
+		40564FFD135E2EF700CB3A7D /* StringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 40564FFB135E2EF700CB3A7D /* StringTests.m */; };
+		40565002135E305B00CB3A7D /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 40565001135E305B00CB3A7D /* libsqlite3.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		40564FD2135E2E9E00CB3A7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 40564FB6135E2E9E00CB3A7D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 40564FBE135E2E9E00CB3A7D;
+			remoteInfo = Merlin;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		40564FBF135E2E9E00CB3A7D /* libMerlin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMerlin.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		40564FC2135E2E9E00CB3A7D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		40564FC6135E2E9E00CB3A7D /* Merlin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Merlin-Prefix.pch"; sourceTree = "<group>"; };
+		40564FCC135E2E9E00CB3A7D /* MerlinTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MerlinTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		40564FCD135E2E9E00CB3A7D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		40564FD0135E2E9E00CB3A7D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		40564FD7135E2E9E00CB3A7D /* MerlinTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MerlinTests-Info.plist"; sourceTree = "<group>"; };
+		40564FD9135E2E9E00CB3A7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		40564FDB135E2E9E00CB3A7D /* MerlinTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MerlinTests-Prefix.pch"; sourceTree = "<group>"; };
+		40564FE8135E2EB100CB3A7D /* MLBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLBase.h; sourceTree = "<group>"; };
+		40564FE9135E2EB100CB3A7D /* MLBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLBase.m; sourceTree = "<group>"; };
+		40564FEA135E2EB100CB3A7D /* MLColumn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLColumn.h; sourceTree = "<group>"; };
+		40564FEB135E2EB100CB3A7D /* MLColumn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLColumn.m; sourceTree = "<group>"; };
+		40564FEC135E2EB100CB3A7D /* MLDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLDatabase.h; sourceTree = "<group>"; };
+		40564FED135E2EB100CB3A7D /* MLDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLDatabase.m; sourceTree = "<group>"; };
+		40564FEE135E2EB100CB3A7D /* NSString+MerlinAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MerlinAdditions.h"; sourceTree = "<group>"; };
+		40564FEF135E2EB100CB3A7D /* NSString+MerlinAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MerlinAdditions.m"; sourceTree = "<group>"; };
+		40564FF8135E2EF700CB3A7D /* MerlinTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MerlinTests.h; sourceTree = "<group>"; };
+		40564FF9135E2EF700CB3A7D /* MerlinTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MerlinTests.m; sourceTree = "<group>"; };
+		40564FFA135E2EF700CB3A7D /* StringTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringTests.h; sourceTree = "<group>"; };
+		40564FFB135E2EF700CB3A7D /* StringTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringTests.m; sourceTree = "<group>"; };
+		40564FFF135E300F00CB3A7D /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		40565000135E301800CB3A7D /* README.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
+		40565001135E305B00CB3A7D /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		40564FBC135E2E9E00CB3A7D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40564FC3135E2E9E00CB3A7D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		40564FC8135E2E9E00CB3A7D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40565002135E305B00CB3A7D /* libsqlite3.dylib in Frameworks */,
+				40564FCE135E2E9E00CB3A7D /* UIKit.framework in Frameworks */,
+				40564FCF135E2E9E00CB3A7D /* Foundation.framework in Frameworks */,
+				40564FD1135E2E9E00CB3A7D /* CoreGraphics.framework in Frameworks */,
+				40564FD4135E2E9E00CB3A7D /* libMerlin.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		40564FB4135E2E9E00CB3A7D = {
+			isa = PBXGroup;
+			children = (
+				40564FC4135E2E9E00CB3A7D /* Merlin */,
+				40564FD5135E2E9E00CB3A7D /* MerlinTests */,
+				40564FC1135E2E9E00CB3A7D /* Frameworks */,
+				40564FFE135E2FEF00CB3A7D /* Text */,
+				40564FC0135E2E9E00CB3A7D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		40564FC0135E2E9E00CB3A7D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				40564FBF135E2E9E00CB3A7D /* libMerlin.a */,
+				40564FCC135E2E9E00CB3A7D /* MerlinTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		40564FC1135E2E9E00CB3A7D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				40565001135E305B00CB3A7D /* libsqlite3.dylib */,
+				40564FC2135E2E9E00CB3A7D /* Foundation.framework */,
+				40564FCD135E2E9E00CB3A7D /* UIKit.framework */,
+				40564FD0135E2E9E00CB3A7D /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		40564FC4135E2E9E00CB3A7D /* Merlin */ = {
+			isa = PBXGroup;
+			children = (
+				40564FE8135E2EB100CB3A7D /* MLBase.h */,
+				40564FE9135E2EB100CB3A7D /* MLBase.m */,
+				40564FEA135E2EB100CB3A7D /* MLColumn.h */,
+				40564FEB135E2EB100CB3A7D /* MLColumn.m */,
+				40564FEC135E2EB100CB3A7D /* MLDatabase.h */,
+				40564FED135E2EB100CB3A7D /* MLDatabase.m */,
+				40564FEE135E2EB100CB3A7D /* NSString+MerlinAdditions.h */,
+				40564FEF135E2EB100CB3A7D /* NSString+MerlinAdditions.m */,
+				40564FC5135E2E9E00CB3A7D /* Supporting Files */,
+			);
+			path = Merlin;
+			sourceTree = "<group>";
+		};
+		40564FC5135E2E9E00CB3A7D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				40564FC6135E2E9E00CB3A7D /* Merlin-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		40564FD5135E2E9E00CB3A7D /* MerlinTests */ = {
+			isa = PBXGroup;
+			children = (
+				40564FF8135E2EF700CB3A7D /* MerlinTests.h */,
+				40564FF9135E2EF700CB3A7D /* MerlinTests.m */,
+				40564FFA135E2EF700CB3A7D /* StringTests.h */,
+				40564FFB135E2EF700CB3A7D /* StringTests.m */,
+				40564FD6135E2E9E00CB3A7D /* Supporting Files */,
+			);
+			path = MerlinTests;
+			sourceTree = "<group>";
+		};
+		40564FD6135E2E9E00CB3A7D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				40564FD7135E2E9E00CB3A7D /* MerlinTests-Info.plist */,
+				40564FD8135E2E9E00CB3A7D /* InfoPlist.strings */,
+				40564FDB135E2E9E00CB3A7D /* MerlinTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		40564FFE135E2FEF00CB3A7D /* Text */ = {
+			isa = PBXGroup;
+			children = (
+				40564FFF135E300F00CB3A7D /* LICENSE */,
+				40565000135E301800CB3A7D /* README.markdown */,
+			);
+			name = Text;
+			path = Merlin;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		40564FBD135E2E9E00CB3A7D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40564FF0135E2EB100CB3A7D /* MLBase.h in Headers */,
+				40564FF2135E2EB100CB3A7D /* MLColumn.h in Headers */,
+				40564FF4135E2EB100CB3A7D /* MLDatabase.h in Headers */,
+				40564FF6135E2EB100CB3A7D /* NSString+MerlinAdditions.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		40564FBE135E2E9E00CB3A7D /* Merlin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 40564FE2135E2E9E00CB3A7D /* Build configuration list for PBXNativeTarget "Merlin" */;
+			buildPhases = (
+				40564FBB135E2E9E00CB3A7D /* Sources */,
+				40564FBC135E2E9E00CB3A7D /* Frameworks */,
+				40564FBD135E2E9E00CB3A7D /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Merlin;
+			productName = Merlin;
+			productReference = 40564FBF135E2E9E00CB3A7D /* libMerlin.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		40564FCB135E2E9E00CB3A7D /* MerlinTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 40564FE5135E2E9E00CB3A7D /* Build configuration list for PBXNativeTarget "MerlinTests" */;
+			buildPhases = (
+				40564FC7135E2E9E00CB3A7D /* Sources */,
+				40564FC8135E2E9E00CB3A7D /* Frameworks */,
+				40564FC9135E2E9E00CB3A7D /* Resources */,
+				40564FCA135E2E9E00CB3A7D /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				40564FD3135E2E9E00CB3A7D /* PBXTargetDependency */,
+			);
+			name = MerlinTests;
+			productName = MerlinTests;
+			productReference = 40564FCC135E2E9E00CB3A7D /* MerlinTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		40564FB6135E2E9E00CB3A7D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 40564FB9135E2E9E00CB3A7D /* Build configuration list for PBXProject "Merlin" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 40564FB4135E2E9E00CB3A7D;
+			productRefGroup = 40564FC0135E2E9E00CB3A7D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				40564FBE135E2E9E00CB3A7D /* Merlin */,
+				40564FCB135E2E9E00CB3A7D /* MerlinTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		40564FC9135E2E9E00CB3A7D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40564FDA135E2E9E00CB3A7D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		40564FCA135E2E9E00CB3A7D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		40564FBB135E2E9E00CB3A7D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40564FF1135E2EB100CB3A7D /* MLBase.m in Sources */,
+				40564FF3135E2EB100CB3A7D /* MLColumn.m in Sources */,
+				40564FF5135E2EB100CB3A7D /* MLDatabase.m in Sources */,
+				40564FF7135E2EB100CB3A7D /* NSString+MerlinAdditions.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		40564FC7135E2E9E00CB3A7D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40564FFC135E2EF700CB3A7D /* MerlinTests.m in Sources */,
+				40564FFD135E2EF700CB3A7D /* StringTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		40564FD3135E2E9E00CB3A7D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 40564FBE135E2E9E00CB3A7D /* Merlin */;
+			targetProxy = 40564FD2135E2E9E00CB3A7D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		40564FD8135E2E9E00CB3A7D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				40564FD9135E2E9E00CB3A7D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		40564FE0135E2E9E00CB3A7D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		40564FE1135E2E9E00CB3A7D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		40564FE3135E2E9E00CB3A7D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DSTROOT = /tmp/Merlin.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Merlin/Merlin-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv6 armv7 i386";
+			};
+			name = Debug;
+		};
+		40564FE4135E2E9E00CB3A7D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DSTROOT = /tmp/Merlin.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Merlin/Merlin-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv6 armv7 i386";
+			};
+			name = Release;
+		};
+		40564FE6135E2E9E00CB3A7D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MerlinTests/MerlinTests-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INFOPLIST_FILE = "MerlinTests/MerlinTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		40564FE7135E2E9E00CB3A7D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MerlinTests/MerlinTests-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INFOPLIST_FILE = "MerlinTests/MerlinTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+		F3C6D53D13B0D58C007908FD /* AdhocProduction */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = AdhocProduction;
+		};
+		F3C6D53E13B0D58C007908FD /* AdhocProduction */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DSTROOT = /tmp/Merlin.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Merlin/Merlin-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv6 armv7 i386";
+			};
+			name = AdhocProduction;
+		};
+		F3C6D53F13B0D58C007908FD /* AdhocProduction */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MerlinTests/MerlinTests-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INFOPLIST_FILE = "MerlinTests/MerlinTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = AdhocProduction;
+		};
+		F3C6D5B413B29219007908FD /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Distribution;
+		};
+		F3C6D5B513B29219007908FD /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv6,
+					armv7,
+				);
+				DSTROOT = /tmp/Merlin.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Merlin/Merlin-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv6 armv7 i386";
+			};
+			name = Distribution;
+		};
+		F3C6D5B613B29219007908FD /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MerlinTests/MerlinTests-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INFOPLIST_FILE = "MerlinTests/MerlinTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Distribution;
+		};
+		F3EC0001137BA2C80068D7CC /* Adhoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Adhoc;
+		};
+		F3EC0002137BA2C80068D7CC /* Adhoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DSTROOT = /tmp/Merlin.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Merlin/Merlin-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv6 armv7 i386";
+			};
+			name = Adhoc;
+		};
+		F3EC0003137BA2C80068D7CC /* Adhoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MerlinTests/MerlinTests-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INFOPLIST_FILE = "MerlinTests/MerlinTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Adhoc;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		40564FB9135E2E9E00CB3A7D /* Build configuration list for PBXProject "Merlin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				40564FE0135E2E9E00CB3A7D /* Debug */,
+				F3EC0001137BA2C80068D7CC /* Adhoc */,
+				F3C6D5B413B29219007908FD /* Distribution */,
+				F3C6D53D13B0D58C007908FD /* AdhocProduction */,
+				40564FE1135E2E9E00CB3A7D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		40564FE2135E2E9E00CB3A7D /* Build configuration list for PBXNativeTarget "Merlin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				40564FE3135E2E9E00CB3A7D /* Debug */,
+				F3EC0002137BA2C80068D7CC /* Adhoc */,
+				F3C6D5B513B29219007908FD /* Distribution */,
+				F3C6D53E13B0D58C007908FD /* AdhocProduction */,
+				40564FE4135E2E9E00CB3A7D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		40564FE5135E2E9E00CB3A7D /* Build configuration list for PBXNativeTarget "MerlinTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				40564FE6135E2E9E00CB3A7D /* Debug */,
+				F3EC0003137BA2C80068D7CC /* Adhoc */,
+				F3C6D5B613B29219007908FD /* Distribution */,
+				F3C6D53F13B0D58C007908FD /* AdhocProduction */,
+				40564FE7135E2E9E00CB3A7D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 40564FB6135E2E9E00CB3A7D /* Project object */;
+}
