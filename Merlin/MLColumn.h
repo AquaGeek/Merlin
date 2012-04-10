@@ -3,7 +3,7 @@
 //  Merlin
 //
 //  Created by Tyler Stromberg on 3/10/11.
-//  Copyright 2011 AKQA, Inc. All rights reserved.
+//  Copyright 2011-2012 AKQA, Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

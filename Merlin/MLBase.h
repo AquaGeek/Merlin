@@ -1,6 +1,6 @@
 /*!
  @header MLBase.h
- @copyright 2011 AKQA, Inc. All rights reserved.
+ @copyright 2011-2012 AKQA, Inc. All rights reserved.
  */
 
 #import <Foundation/Foundation.h>
