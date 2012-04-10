@@ -3,17 +3,17 @@
 //  Merlin
 //
 //  Created by Tyler Stromberg on 3/10/11.
-//  Copyright 2011 AKQA, Inc. All rights reserved.
+//  Copyright 2011-2012 AKQA, Inc. All rights reserved.
 //
 
 #import "MLColumn.h"
 
 @implementation MLColumn
 
-@synthesize columnId;
-@synthesize name;
-@synthesize type;
-@synthesize allowsNull;
+@synthesize columnId = _columnId;
+@synthesize name = _name;
+@synthesize type = _type;
+@synthesize allowsNull = _allowsNull;
 
 + (MLColumn *)columnWithId:(NSInteger)aColumnId
                       name:(NSString *)aName
@@ -36,10 +36,10 @@
     
     if (self != nil)
     {
-        columnId = aColumnId;
-        name = [aName copy];
-        type = aType;
-        allowsNull = shouldAllowNull;
+        _columnId = aColumnId;
+        _name = [aName copy];
+        _type = aType;
+        _allowsNull = shouldAllowNull;
     }
     
     return self;
@@ -47,14 +47,14 @@
 
 - (void)dealloc
 {
-    [name release];
+    [_name release];
     
     [super dealloc];
 }
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"%@ (%@)", name, type];
+    return [NSString stringWithFormat:@"%@ (%@)", self.name, self.type];
 }
 
 @end

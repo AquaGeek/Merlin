@@ -3,18 +3,14 @@
 //  Merlin
 //
 //  Created by Tyler Stromberg on 3/11/11.
-//  Copyright 2011 AKQA, Inc. All rights reserved.
+//  Copyright 2011-2012 AKQA, Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
 #import <sqlite3.h>
 
-@interface MLDatabase : NSObject {    
-@private
-    NSString *databasePath;
-    sqlite3 *database;
-}
+@interface MLDatabase : NSObject
 
 @property (nonatomic, readonly) sqlite3 *database;
 

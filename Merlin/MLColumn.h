@@ -3,7 +3,7 @@
 //  Merlin
 //
 //  Created by Tyler Stromberg on 3/10/11.
-//  Copyright 2011 AKQA, Inc. All rights reserved.
+//  Copyright 2011-2012 AKQA, Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -16,13 +16,7 @@ typedef enum {
     kSQLiteColumnTypeNull
 } SQLiteColumnType;
 
-@interface MLColumn : NSObject {
-@private
-    NSInteger columnId;
-    NSString *name;
-    SQLiteColumnType type;
-    BOOL allowsNull;
-}
+@interface MLColumn : NSObject
 
 @property (nonatomic, assign) NSInteger columnId;
 @property (nonatomic, copy) NSString *name;

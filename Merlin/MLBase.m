@@ -3,7 +3,7 @@
 //  Merlin
 //
 //  Created by Tyler Stromberg on 3/10/11.
-//  Copyright 2011 AKQA, Inc. All rights reserved.
+//  Copyright 2011-2012 AKQA, Inc. All rights reserved.
 //
 
 #import "MLBase.h"
@@ -16,8 +16,15 @@
 #import "NSString+MerlinAdditions.h"
 
 NSDictionary *sqlite3Step(sqlite3_stmt *aStatement);
+id getSQLiteAttributeIMP(MLBase *self, SEL _cmd);
+void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue);
 
 @interface MLBase()
+{
+@private
+    NSMutableDictionary *_attributes;
+    NSMutableDictionary *_changedAttributes;
+}
 
 + (MLDatabase *)database;
 + (void)evaluateQuery:(NSString *)queryString withBlock:(void (^)(NSDictionary *attributes))block;
@@ -36,7 +43,7 @@ NSDictionary *sqlite3Step(sqlite3_stmt *aStatement);
 @implementation MLBase
 
 @dynamic id;
-@synthesize newRecord;
+@synthesize newRecord = _newRecord;
 
 #pragma mark Config/setup
 
@@ -45,7 +52,10 @@ static NSMutableDictionary *databaseMapping = nil;
 
 + (void)initialize
 {
-    databaseMapping = [[NSMutableDictionary alloc] initWithCapacity:3];
+    if (self == [MLBase class])
+    {
+        databaseMapping = [[NSMutableDictionary alloc] initWithCapacity:3];
+    }
 }
 
 + (void)setDatabase:(MLDatabase *)aDatabase
@@ -143,7 +153,7 @@ static NSMutableDictionary *databaseMapping = nil;
 id getSQLiteAttributeIMP(MLBase *self, SEL _cmd)
 {
     NSString *getterName = NSStringFromSelector(_cmd);
-    return [self->attributes valueForKey:getterName];
+    return [self->_attributes valueForKey:getterName];
 }
 
 void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
@@ -178,8 +188,8 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
     }
     
     // Update the attribute dict as well as the changed attribute dict
-    [self->attributes setValue:newValue forKey:keyName];
-    [self->changedAttributes setValue:newValue forKey:keyName];
+    [self->_attributes setValue:newValue forKey:keyName];
+    [self->_changedAttributes setValue:newValue forKey:keyName];
 }
 
 + (void)injectColumnProperties:(NSArray *)columns
@@ -362,11 +372,11 @@ NSDictionary *sqlite3Step(sqlite3_stmt *aStatement)
     
     if (self)
     {
-        attributes = [[NSMutableDictionary alloc] initWithDictionary:newAttributes];
-        changedAttributes = [[NSMutableDictionary alloc] initWithCapacity:newAttributes.count];
+        _attributes = [[NSMutableDictionary alloc] initWithDictionary:newAttributes];
+        _changedAttributes = [[NSMutableDictionary alloc] initWithCapacity:newAttributes.count];
         
         // Default attributes
-        newRecord = YES;
+        _newRecord = YES;
     }
     
     return self;
@@ -374,8 +384,8 @@ NSDictionary *sqlite3Step(sqlite3_stmt *aStatement)
 
 - (void)dealloc
 {
-    [attributes release];
-    [changedAttributes release];
+    [_attributes release];
+    [_changedAttributes release];
     
     [super dealloc];
 }
@@ -392,7 +402,7 @@ NSDictionary *sqlite3Step(sqlite3_stmt *aStatement)
     if (success)
     {
         // Clear our changed attributes
-        [changedAttributes removeAllObjects];
+        [_changedAttributes removeAllObjects];
     }
     
     return success;
@@ -400,7 +410,7 @@ NSDictionary *sqlite3Step(sqlite3_stmt *aStatement)
 
 - (BOOL)createOrUpdate
 {
-    return (newRecord) ? [self create] : [self update];
+    return (self.newRecord) ? [self create] : [self update];
 }
 
 - (BOOL)update
@@ -409,11 +419,11 @@ NSDictionary *sqlite3Step(sqlite3_stmt *aStatement)
     NSMutableString *updateQueryString = [NSMutableString stringWithFormat:@"UPDATE \"%@\" SET ",
                                           [[self class] tableName]];
     
-    NSArray *changedColumns = [changedAttributes allKeys];
+    NSArray *changedColumns = [_changedAttributes allKeys];
     for (int i = 0; i < changedColumns.count; ++i)
     {
         NSString *changedColumnName = [changedColumns objectAtIndex:i];
-        id value = [changedAttributes valueForKey:changedColumnName];
+        id value = [_changedAttributes valueForKey:changedColumnName];
         
         if (![value isKindOfClass:[NSString class]])
         {
@@ -454,7 +464,7 @@ NSDictionary *sqlite3Step(sqlite3_stmt *aStatement)
     {
         MLColumn *column = [columns objectAtIndex:i];
         
-        id value = [attributes valueForKey:column.name];
+        id value = [_attributes valueForKey:column.name];
         
         if (value == nil)
         {
