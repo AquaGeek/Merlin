@@ -8,9 +8,20 @@
 
 #import "MLDatabase.h"
 
+@interface MLDatabase()
+{
+@private
+    NSString *_databasePath;
+}
+
+@end
+
+
+#pragma mark -
+
 @implementation MLDatabase
 
-@synthesize database;
+@synthesize database = _database;
 
 + (MLDatabase *)databaseWithPath:(NSString *)pathToDatabase
 {
@@ -24,9 +35,9 @@
     
     if (self != nil)
     {
-        databasePath = [pathToDatabase copy];
+        _databasePath = [pathToDatabase copy];
         
-        if(sqlite3_open([pathToDatabase UTF8String], &database) != SQLITE_OK)
+        if (sqlite3_open([pathToDatabase UTF8String], &_database) != SQLITE_OK)
         {
             NSLog(@"Failed to open database at '%@'", pathToDatabase);
             [self release];
@@ -39,9 +50,9 @@
 
 - (void)dealloc
 {
-    if (database != NULL)
+    if (_database != NULL)
     {
-        sqlite3_close(database);
+        sqlite3_close(_database);
     }
     
     [super dealloc];

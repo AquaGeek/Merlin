@@ -11,13 +11,7 @@
  @class MLBase
  @abstract Abstract base class for model classes that interact with an SQLite database.
  */
-@interface MLBase : NSObject {
-@private
-    NSMutableDictionary *attributes;
-    NSMutableDictionary *changedAttributes;
-    
-    BOOL newRecord;
-}
+@interface MLBase : NSObject
 
 @property (nonatomic, retain) NSNumber *id;
 @property (nonatomic, assign, getter = isNewRecord) BOOL newRecord;

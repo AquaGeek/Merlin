@@ -10,11 +10,7 @@
 
 #import <sqlite3.h>
 
-@interface MLDatabase : NSObject {    
-@private
-    NSString *databasePath;
-    sqlite3 *database;
-}
+@interface MLDatabase : NSObject
 
 @property (nonatomic, readonly) sqlite3 *database;
 

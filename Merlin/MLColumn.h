@@ -16,13 +16,7 @@ typedef enum {
     kSQLiteColumnTypeNull
 } SQLiteColumnType;
 
-@interface MLColumn : NSObject {
-@private
-    NSInteger columnId;
-    NSString *name;
-    SQLiteColumnType type;
-    BOOL allowsNull;
-}
+@interface MLColumn : NSObject
 
 @property (nonatomic, assign) NSInteger columnId;
 @property (nonatomic, copy) NSString *name;
