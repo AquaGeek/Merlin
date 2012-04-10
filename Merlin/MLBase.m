@@ -52,7 +52,10 @@ static NSMutableDictionary *databaseMapping = nil;
 
 + (void)initialize
 {
-    databaseMapping = [[NSMutableDictionary alloc] initWithCapacity:3];
+    if (self == [MLBase class])
+    {
+        databaseMapping = [[NSMutableDictionary alloc] initWithCapacity:3];
+    }
 }
 
 + (void)setDatabase:(MLDatabase *)aDatabase
