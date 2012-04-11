@@ -213,6 +213,11 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
     }
 }
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@ %p>(%@)", NSStringFromClass([self class]), self, [_attributes description]];
+}
+
 
 #pragma mark - Finders
 
