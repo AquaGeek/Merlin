@@ -49,6 +49,7 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue);
 
 // Hash to map class names to their respective databases
 static NSMutableDictionary *databaseMapping = nil;
+static BOOL returnNilForNull = NO;
 
 + (void)initialize
 {
@@ -56,6 +57,11 @@ static NSMutableDictionary *databaseMapping = nil;
     {
         databaseMapping = [[NSMutableDictionary alloc] initWithCapacity:3];
     }
+}
+
++ (void)setReturnsNilForNull:(BOOL)returnNil
+{
+    returnNilForNull = returnNil;
 }
 
 + (void)setDatabase:(MLDatabase *)aDatabase
@@ -153,7 +159,9 @@ static NSMutableDictionary *databaseMapping = nil;
 id getSQLiteAttributeIMP(MLBase *self, SEL _cmd)
 {
     NSString *getterName = NSStringFromSelector(_cmd);
-    return [self->_attributes valueForKey:getterName];
+    id value = [self->_attributes valueForKey:getterName];
+    
+    return (returnNilForNull && value == [NSNull null]) ? nil : value;
 }
 
 void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)

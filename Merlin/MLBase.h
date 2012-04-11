@@ -17,6 +17,13 @@
 @property (nonatomic, assign, getter = isNewRecord) BOOL newRecord;
 
 /*!
+ @method setReturnsNilForNull:
+ @abstract Sets whether or not we should return nil for any NULL attributes in the database. By default,
+ we return NSNull. Note: Changing this value affects all subclasses (i.e. it's a "master switch").
+ */
++ (void)setReturnsNilForNull:(BOOL)returnNil;
+
+/*!
  @methodgroup Configuration and setup
  */
 
