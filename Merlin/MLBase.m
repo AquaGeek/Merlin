@@ -125,14 +125,27 @@ static BOOL returnNilForNull = NO;
             // TODO: There's got to be a better way to do this
             NSString *typeStr = [NSString stringWithUTF8String:(char *)sqlite3_column_text(queryStatement, 2)];
             SQLiteColumnType type = kSQLiteColumnTypeNull;
-            if ([typeStr isEqualToString:@"INTEGER"])
+            
+            if ([typeStr rangeOfString:@"INT"].location != NSNotFound)
+            {
                 type = kSQLiteColumnTypeInteger;
-            else if ([typeStr isEqualToString:@"FLOAT"])
-                type = kSQLiteColumnTypeFloat;
-            else if ([typeStr isEqualToString:@"TEXT"])
+            }
+            else if ([typeStr rangeOfString:@"CHAR"].location != NSNotFound ||
+                     [typeStr rangeOfString:@"CLOB"].location != NSNotFound ||
+                     [typeStr rangeOfString:@"TEXT"].location != NSNotFound)
+            {
                 type = kSQLiteColumnTypeText;
+            }
             else if ([typeStr isEqualToString:@"BLOB"])
+            {
                 type = kSQLiteColumnTypeBlob;
+            }
+            else if ([typeStr rangeOfString:@"REAL"].location != NSNotFound ||
+                     [typeStr rangeOfString:@"FLOA"].location != NSNotFound ||
+                     [typeStr rangeOfString:@"DOUB"].location != NSNotFound)
+            {
+                type = kSQLiteColumnTypeFloat;
+            }
             
             BOOL allowsNull = !sqlite3_column_int(queryStatement, 3);
             BOOL isPrimaryKey = sqlite3_column_int(queryStatement, 5);
