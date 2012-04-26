@@ -50,6 +50,7 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue);
 // Hash to map class names to their respective databases
 static NSMutableDictionary *databaseMapping = nil;
 static BOOL returnNilForNull = NO;
+static MLNamingStyle namingStyle = MLNamingStyleCamelCase;
 
 + (void)initialize
 {
@@ -62,6 +63,16 @@ static BOOL returnNilForNull = NO;
 + (void)setReturnsNilForNull:(BOOL)returnNil
 {
     returnNilForNull = returnNil;
+}
+
++ (MLNamingStyle)namingStyle
+{
+    return namingStyle;
+}
+
++ (void)setNamingStyle:(MLNamingStyle)newStyle
+{
+    namingStyle = newStyle;
 }
 
 + (void)setDatabase:(MLDatabase *)aDatabase
@@ -87,8 +98,17 @@ static BOOL returnNilForNull = NO;
 
 + (NSString *)tableName
 {
-    NSString *className = [NSStringFromClass([self class]) lowerCamelCaseString];
-    return [className stringByAppendingString:@"s"];
+    // TODO: Support proper inflection
+    NSString *tableName = [[NSStringFromClass([self class]) lowerCamelCaseString] stringByAppendingString:@"s"];
+    
+    if ([self namingStyle] == MLNamingStyleSnakeCase)
+    {
+        return [tableName underscoredString];
+    }
+    else
+    {
+        return tableName;
+    }
 }
 
 // TODO: Better way to keep track of columns per class?
@@ -172,6 +192,12 @@ static BOOL returnNilForNull = NO;
 id getSQLiteAttributeIMP(MLBase *self, SEL _cmd)
 {
     NSString *getterName = NSStringFromSelector(_cmd);
+    
+    if ([[self class] namingStyle] == MLNamingStyleSnakeCase)
+    {
+        getterName = [getterName underscoredString];
+    }
+    
     id value = [self->_attributes valueForKey:getterName];
     
     return (returnNilForNull && value == [NSNull null]) ? nil : value;
@@ -202,6 +228,11 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
         keyName = [keyName stringByReplacingOccurrencesOfString:@":" withString:@""];
     }
     
+    if ([[self class] namingStyle] == MLNamingStyleSnakeCase)
+    {
+        keyName = [keyName underscoredString];
+    }
+    
     // We can't put nil into a dictionary
     if (newValue == nil)
     {
@@ -217,10 +248,10 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
 {
     for (MLColumn *column in columns)
     {
-        NSString *getterName = column.name;
+        NSString *getterName = [column.name lowerCamelCaseString];
         class_addMethod(self, NSSelectorFromString(getterName), (IMP)&getSQLiteAttributeIMP, "@@:");
         
-        NSString *capitalizedColumnName = [[[column.name substringToIndex:1] uppercaseString] stringByAppendingString:[column.name substringFromIndex:1]];
+        NSString *capitalizedColumnName = [[[getterName substringToIndex:1] uppercaseString] stringByAppendingString:[getterName substringFromIndex:1]];
         NSString *setterName = [NSString stringWithFormat:@"set%@:", capitalizedColumnName];
         class_addMethod(self, NSSelectorFromString(setterName), (IMP)&setSQLiteAttributeIMP, "v@:@");
     }
@@ -449,6 +480,12 @@ NSDictionary *sqlite3Step(sqlite3_stmt *aStatement)
     for (int i = 0; i < changedColumns.count; ++i)
     {
         NSString *changedColumnName = [changedColumns objectAtIndex:i];
+        
+        if ([[self class] namingStyle] == MLNamingStyleSnakeCase)
+        {
+            changedColumnName = [changedColumnName underscoredString];
+        }
+        
         id value = [_changedAttributes valueForKey:changedColumnName];
         
         if (![value isKindOfClass:[NSString class]])
@@ -483,8 +520,25 @@ NSDictionary *sqlite3Step(sqlite3_stmt *aStatement)
                                           [[self class] tableName]];
     
     NSArray *columns = [[self class] columns];
-    NSString *columnNames = [[columns valueForKey:@"name"] componentsJoinedByString:@","];
-    [insertQueryString appendFormat:@"%@) VALUES(", columnNames];
+    NSArray *columnNames = [columns valueForKey:@"name"];
+    for (NSInteger i = 0; i < columnNames.count; i++)
+    {
+        NSString *columnName = [columnNames objectAtIndex:i];
+        
+        if ([[self class] namingStyle] == MLNamingStyleSnakeCase)
+        {
+            columnName = [columnName underscoredString];
+        }
+        
+        [insertQueryString appendString:columnName];
+        
+        if (i < columnNames.count - 1)
+        {
+            [insertQueryString appendString:@","];
+        }
+    }
+    
+    [insertQueryString appendString:@") VALUES("];
     
     for (int i = 0; i < columns.count; ++i)
     {

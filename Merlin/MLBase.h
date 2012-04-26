@@ -5,6 +5,11 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum {
+    MLNamingStyleCamelCase = 0,
+    MLNamingStyleSnakeCase
+} MLNamingStyle;
+
 @class MLDatabase;
 
 /*!
@@ -22,6 +27,9 @@
  we return NSNull. Note: Changing this value affects all subclasses (i.e. it's a "master switch").
  */
 + (void)setReturnsNilForNull:(BOOL)returnNil;
+
++ (MLNamingStyle)namingStyle;
++ (void)setNamingStyle:(MLNamingStyle)newStyle;
 
 /*!
  @methodgroup Configuration and setup
