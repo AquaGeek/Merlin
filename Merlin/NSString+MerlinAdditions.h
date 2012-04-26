@@ -17,4 +17,6 @@
  */
 - (NSString *)lowerCamelCaseString;
 
+- (NSString *)underscoredString;
+
 @end
