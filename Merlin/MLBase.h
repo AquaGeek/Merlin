@@ -57,6 +57,8 @@ typedef enum {
  @methodgroup Finders
  */
 
++ (void)fetchObjectsWithQuery:(NSString *)queryString withBlock:(void (^)(MLBase *obj))block;
+
 /*!
  @method first
  @abstract Finds the first record in the database, sorted by id.

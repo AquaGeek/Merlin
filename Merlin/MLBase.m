@@ -28,7 +28,6 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue);
 
 + (MLDatabase *)database;
 + (void)evaluateQuery:(NSString *)queryString withBlock:(void (^)(NSDictionary *attributes))block;
-+ (void)fetchObjectsWithQuery:(NSString *)queryString withBlock:(void (^)(MLBase *obj))block;
 + (void)injectColumnProperties:(NSArray *)columns;
 
 - (BOOL)createOrUpdate;
