@@ -266,6 +266,15 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
     return [NSString stringWithFormat:@"<%@ %p>(%@)", NSStringFromClass([self class]), self, [_attributes description]];
 }
 
++ (BOOL)ensureIndexOnColumns:(NSArray *)columnNames unique:(BOOL)unique
+{
+    NSString *indexName = [NSString stringWithFormat:@"%@_%@_index", [self tableName], [columnNames componentsJoinedByString:@"_"]];
+    NSString *query = [NSString stringWithFormat:@"CREATE %@INDEX IF NOT EXISTS %@ ON %@(%@);",
+                       unique ? @"UNIQUE " : @"", indexName, [self tableName], [columnNames componentsJoinedByString:@","]];
+    
+    return [[self database] evaluateQuery:query withBlock:NULL];
+}
+
 
 #pragma mark - Finders
 

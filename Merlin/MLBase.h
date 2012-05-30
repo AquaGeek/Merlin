@@ -60,6 +60,16 @@ typedef enum {
 + (NSArray *)columns;
 
 /*!
+ @method ensureIndexOnColumn:
+ @abstract Creates an index on the given columns, if it doesn't already exist.
+ @param columnNames An array of column names on which to create the index.
+ @param unique Whether or not the index should be unique.
+ @result Returns YES on success, NO on failure.
+ @discussion This method should only be called AFTER you've set the database via setDatabase:
+ */
++ (BOOL)ensureIndexOnColumns:(NSArray *)columnNames unique:(BOOL)unique;
+
+/*!
  @methodgroup Finders
  */
 
