@@ -476,7 +476,7 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
         
         id value = [_attributes valueForKey:column.name];
         
-        if (value == nil)
+        if (value == nil || value == [NSNull null])
         {
             value = @"NULL";
         }
