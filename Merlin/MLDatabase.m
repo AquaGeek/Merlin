@@ -19,11 +19,26 @@
 
 #pragma mark -
 
+static NSMutableDictionary *connectionMap;
+
 @implementation MLDatabase
 
 @synthesize database = _database;
 
++ (void)initialize
+{
+    if (self == [MLDatabase class])
+    {
+        connectionMap = [[NSMutableDictionary alloc] init];
+    }
+}
+
 + (MLDatabase *)databaseWithPath:(NSString *)pathToDatabase
+{
+    return [self databaseWithPath:pathToDatabase reuseConnection:YES];
+}
+
++ (MLDatabase *)databaseWithPath:(NSString *)pathToDatabase reuseConnection:(BOOL)reuseConnection
 {
     MLDatabase *newDatabase = [[MLDatabase alloc] initWithPath:pathToDatabase];
     return [newDatabase autorelease];
@@ -31,9 +46,23 @@
 
 - (id)initWithPath:(NSString *)pathToDatabase
 {
-    self = [super init];
+    return [self initWithPath:pathToDatabase reuseConnection:YES];
+}
+
+- (id)initWithPath:(NSString *)pathToDatabase reuseConnection:(BOOL)reuseConnection
+{
+    NSAssert(pathToDatabase != nil, @"pathToDatabase must not be nil");
     
-    if (self != nil)
+    // See if we already have an open connection to the database at the given path.
+    MLDatabase *db = [connectionMap objectForKey:pathToDatabase];
+    
+    if (reuseConnection && db != nil)
+    {
+        // If so, reuse it.
+        [self release];
+        self = [db retain];
+    }
+    else if ((self = [super init]))
     {
         _databasePath = [pathToDatabase copy];
         
@@ -41,7 +70,12 @@
         {
             NSLog(@"Failed to open database at '%@'", pathToDatabase);
             [self release];
-            return nil;
+            self = nil;
+        }
+        else if (db == nil)
+        {
+            // Only cache this connection if we don't already have one cached.
+            [connectionMap setObject:self forKey:pathToDatabase];
         }
     }
     

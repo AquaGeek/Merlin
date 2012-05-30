@@ -15,7 +15,9 @@
 @property (nonatomic, readonly) sqlite3 *database;
 
 + (MLDatabase *)databaseWithPath:(NSString *)pathToDatabase;
++ (MLDatabase *)databaseWithPath:(NSString *)pathToDatabase reuseConnection:(BOOL)reuseConnection;
 - (id)initWithPath:(NSString *)pathToDatabase;
+- (id)initWithPath:(NSString *)pathToDatabase reuseConnection:(BOOL)reuseConnection;
 
 - (BOOL)evaluateQuery:(NSString *)queryString withBlock:(void (^)(NSDictionary *attributes))block;
 
