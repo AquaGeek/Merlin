@@ -36,6 +36,12 @@ typedef enum {
  */
 
 /*!
+ @method database
+ @result Returns the MLDatabase that has been configured for the class via setDatabase:.
+ */
++ (MLDatabase *)database;
+
+/*!
  @method setDatabase:
  @abstract Sets the class-wide SQLite database.
  @param aDatabase The initialized MLDatabase object to use for this class.

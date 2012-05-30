@@ -58,4 +58,120 @@
     [super dealloc];
 }
 
+
+#pragma mark -
+
+// This is a somewhat modified version of the sqlite3_exec implementation that uses blocks instead of
+// callback functions and Objective-C objects instead of C primitives.
+- (BOOL)evaluateQuery:(NSString *)queryString withBlock:(void (^)(NSDictionary *attributes))block
+{
+    sqlite3_stmt *preparedStatement = NULL;
+    const char *sql = [queryString UTF8String];
+    const char *remainingSQL = NULL;
+    int rc = SQLITE_OK;
+    
+    while (rc == SQLITE_OK && sql[0])  // Loop until we run out of SQL or hit an error
+    {
+        int columnCount = 0;
+        preparedStatement = NULL;
+        
+        rc = sqlite3_prepare_v2(self.database, sql, -1, &preparedStatement, &remainingSQL);
+        
+        if (rc != SQLITE_OK)
+        {
+            continue;
+        }
+        
+        if (preparedStatement == NULL)
+        {
+            // This happens for a comment or whitespace
+            sql = remainingSQL;
+            continue;
+        }
+        
+        columnCount = sqlite3_column_count(preparedStatement);
+        
+        NSMutableDictionary *attributes = nil;
+        
+        while (1)
+        {
+            // Try to step
+            rc = sqlite3_step(preparedStatement);
+            
+            if (block && rc == SQLITE_ROW)
+            {
+                // Parse the resulting row into a dictionary and pass it to the callback block
+                attributes = [NSMutableDictionary dictionaryWithCapacity:columnCount];
+                for (int i = 0; i < columnCount; ++i)
+                {
+                    id value = nil;
+                    NSString *columnName = [NSString stringWithUTF8String:(char *)sqlite3_column_name(preparedStatement, i)];
+                    
+                    switch (sqlite3_column_type(preparedStatement, i))
+                    {
+                        case SQLITE_INTEGER:
+                            value = [NSNumber numberWithLongLong:sqlite3_column_int64(preparedStatement, i)];
+                            break;
+                        case SQLITE_FLOAT:
+                            value = [NSNumber numberWithDouble:sqlite3_column_double(preparedStatement, i)];
+                            break;
+                        case SQLITE_TEXT:
+                            value = [NSString stringWithUTF8String:(char *)sqlite3_column_text(preparedStatement, i)];
+                            break;
+                        case SQLITE_BLOB:
+                        {
+                            int byteCount = sqlite3_column_bytes(preparedStatement, i);
+                            value = [NSData dataWithBytes:sqlite3_column_blob(preparedStatement, i) length:byteCount];
+                            break;
+                        }
+                        case SQLITE_NULL:
+                            value = [NSNull null];
+                            break;
+                        default:
+                            // TODO: Raise exception
+                            NSLog(@"Invalid SQLite type");
+                            break;
+                    }
+                    
+                    if (value != nil)
+                    {
+                        [attributes setObject:value forKey:columnName];
+                    }
+                }
+                
+                block(attributes);
+                attributes = nil;
+            }
+            
+            if (rc != SQLITE_ROW)
+            {
+                rc = sqlite3_finalize(preparedStatement);
+                preparedStatement = NULL;
+                
+                if (rc != SQLITE_SCHEMA)
+                {
+                    sql = remainingSQL;
+                }
+                
+                break;
+            }
+        }
+    }
+    
+    if (preparedStatement != NULL)
+    {
+        sqlite3_finalize(preparedStatement);
+    }
+    
+    if (rc != SQLITE_OK)
+    {
+        int errorCode = sqlite3_errcode(self.database);
+        NSString *errorMessage = [NSString stringWithCString:sqlite3_errmsg(self.database) encoding:NSUTF8StringEncoding];
+        
+        NSLog(@"SQLite error %d: %@", errorCode, errorMessage);
+    }
+    
+    return rc == SQLITE_OK;
+}
+
 @end
