@@ -29,6 +29,9 @@ typedef enum {
 + (void)setReturnsNilForNull:(BOOL)returnNil;
 
 + (MLNamingStyle)namingStyle;
+
+// Note: This is also a "master switch" - you must use the same naming style across all subclasses. Subclasses can,
+// however, override namingStyle if they wish to use a style that differs from the "master" setting.
 + (void)setNamingStyle:(MLNamingStyle)newStyle;
 
 /*!
