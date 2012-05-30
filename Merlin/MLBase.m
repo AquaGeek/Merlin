@@ -94,8 +94,16 @@ static MLNamingStyle namingStyle = MLNamingStyleCamelCase;
 
 + (NSString *)tableName
 {
+    NSString *baseName = NSStringFromClass(self);
+    NSUInteger locationOfFirstLowercaseLetter = [baseName rangeOfCharacterFromSet:[NSCharacterSet lowercaseLetterCharacterSet]].location;
+    
+    if (locationOfFirstLowercaseLetter > 0 && locationOfFirstLowercaseLetter != NSNotFound)
+    {
+        baseName = [[baseName substringFromIndex:locationOfFirstLowercaseLetter - 1] lowerCamelCaseString];
+    }
+    
     // TODO: Support proper inflection
-    NSString *tableName = [[NSStringFromClass([self class]) lowerCamelCaseString] stringByAppendingString:@"s"];
+    NSString *tableName = [baseName stringByAppendingString:@"s"];
     
     if ([self namingStyle] == MLNamingStyleSnakeCase)
     {
