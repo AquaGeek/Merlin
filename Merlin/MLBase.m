@@ -25,7 +25,6 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue);
     NSMutableDictionary *_changedAttributes;
 }
 
-+ (MLDatabase *)database;
 + (void)injectColumnProperties:(NSArray *)columns;
 
 - (BOOL)createOrUpdate;
