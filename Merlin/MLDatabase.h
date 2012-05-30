@@ -17,4 +17,6 @@
 + (MLDatabase *)databaseWithPath:(NSString *)pathToDatabase;
 - (id)initWithPath:(NSString *)pathToDatabase;
 
+- (BOOL)evaluateQuery:(NSString *)queryString withBlock:(void (^)(NSDictionary *attributes))block;
+
 @end
