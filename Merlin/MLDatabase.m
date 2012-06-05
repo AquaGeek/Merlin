@@ -95,6 +95,18 @@ static NSMutableDictionary *connectionMap;
 
 #pragma mark -
 
++ (NSString *)escapeString:(NSString *)string
+{
+    static NSRegularExpression *quoteRegEx = nil;
+    
+    if (quoteRegEx == nil)
+    {
+        quoteRegEx = [[NSRegularExpression alloc] initWithPattern:@"'" options:0 error:NULL];
+    }
+    
+    return [quoteRegEx stringByReplacingMatchesInString:string options:0 range:NSMakeRange(0, string.length) withTemplate:@"''"];
+}
+
 // This is a somewhat modified version of the sqlite3_exec implementation that uses blocks instead of
 // callback functions and Objective-C objects instead of C primitives.
 - (BOOL)evaluateQuery:(NSString *)queryString withBlock:(void (^)(NSDictionary *attributes))block

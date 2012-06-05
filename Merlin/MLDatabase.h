@@ -19,6 +19,7 @@
 - (id)initWithPath:(NSString *)pathToDatabase;
 - (id)initWithPath:(NSString *)pathToDatabase reuseConnection:(BOOL)reuseConnection;
 
++ (NSString *)escapeString:(NSString *)string;
 - (BOOL)evaluateQuery:(NSString *)queryString withBlock:(void (^)(NSDictionary *attributes))block;
 
 @end

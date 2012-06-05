@@ -424,7 +424,7 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
             value = [value stringValue];
         }
         
-        value = [NSString stringWithFormat:@"\"%@\"", value];
+        value = [NSString stringWithFormat:@"'%@'", [MLDatabase escapeString:value]];
         
         [updateQueryString appendFormat:@"\"%@\"=%@", changedColumnName, value];
         
@@ -488,7 +488,7 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
                 value = [value stringValue];
             }
             
-            value = [NSString stringWithFormat:@"\"%@\"", value];
+            value = [NSString stringWithFormat:@"'%@'", [MLDatabase escapeString:value]];
         }
         
         [insertQueryString appendString:value];
