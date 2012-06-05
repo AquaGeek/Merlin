@@ -202,7 +202,7 @@ id getSQLiteAttributeIMP(MLBase *self, SEL _cmd)
         getterName = [getterName underscoredString];
     }
     
-    id value = [self->_attributes valueForKey:getterName];
+    id value = [self primitiveValueForKey:getterName];
     
     return (returnNilForNull && value == [NSNull null]) ? nil : value;
 }
@@ -244,8 +244,7 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
     }
     
     // Update the attribute dict as well as the changed attribute dict
-    [self->_attributes setValue:newValue forKey:keyName];
-    [self->_changedAttributes setValue:newValue forKey:keyName];
+    [self setPrimitiveValue:newValue forKey:keyName];
 }
 
 + (void)injectColumnProperties:(NSArray *)columns
@@ -514,6 +513,20 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
     }
     
     return YES;  // TODO: Return new record's ID
+}
+
+
+#pragma mark -
+
+- (id)primitiveValueForKey:(NSString *)key
+{
+    return [_attributes valueForKey:key];
+}
+
+- (void)setPrimitiveValue:(id)value forKey:(NSString *)key
+{
+    [_attributes setValue:value forKey:key];
+    [_changedAttributes setValue:value forKey:key];
 }
 
 @end

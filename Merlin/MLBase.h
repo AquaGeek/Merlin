@@ -113,4 +113,7 @@ typedef enum {
 
 - (BOOL)save;
 
+- (id)primitiveValueForKey:(NSString *)key;
+- (void)setPrimitiveValue:(id)value forKey:(NSString *)key;
+
 @end
