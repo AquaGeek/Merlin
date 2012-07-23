@@ -520,7 +520,8 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
 
 - (id)primitiveValueForKey:(NSString *)key
 {
-    return [_attributes valueForKey:key];
+    id value = [_attributes valueForKey:key];
+    return (returnNilForNull && value == [NSNull null]) ? nil : value;
 }
 
 - (void)setPrimitiveValue:(id)value forKey:(NSString *)key
