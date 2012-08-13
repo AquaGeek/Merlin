@@ -406,6 +406,13 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
                                           [[self class] tableName]];
     
     NSArray *changedColumns = [_changedAttributes allKeys];
+    
+    if (changedColumns.count == 0)
+    {
+        // Nothing to do
+        return YES;
+    }
+    
     for (int i = 0; i < changedColumns.count; ++i)
     {
         NSString *changedColumnName = [changedColumns objectAtIndex:i];
@@ -526,8 +533,14 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
 
 - (void)setPrimitiveValue:(id)value forKey:(NSString *)key
 {
+    id oldValue = [_attributes valueForKey:key];
+    
     [_attributes setValue:value forKey:key];
-    [_changedAttributes setValue:value forKey:key];
+    
+    if (![oldValue isEqual:value])
+    {
+        [_changedAttributes setValue:value forKey:key];
+    }
 }
 
 @end
