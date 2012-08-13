@@ -424,13 +424,20 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
         
         id value = [_changedAttributes valueForKey:changedColumnName];
         
-        if (![value isKindOfClass:[NSString class]])
+        if ([value isKindOfClass:[NSNull class]])
         {
-            // TODO: Support blobs
-            value = [value stringValue];
+            value = @"NULL";
         }
-        
-        value = [NSString stringWithFormat:@"'%@'", [MLDatabase escapeString:value]];
+        else
+        {
+            if (![value isKindOfClass:[NSString class]])
+            {
+                // TODO: Support blobs
+                value = [value stringValue];
+            }
+            
+            value = [NSString stringWithFormat:@"'%@'", [MLDatabase escapeString:value]];
+        }
         
         [updateQueryString appendFormat:@"\"%@\"=%@", changedColumnName, value];
         
