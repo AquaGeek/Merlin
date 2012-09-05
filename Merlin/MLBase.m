@@ -540,7 +540,7 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
 
 - (void)setPrimitiveValue:(id)value forKey:(NSString *)key
 {
-    id oldValue = [_attributes valueForKey:key];
+    id oldValue = [[_attributes valueForKey:key] retain];
     
     [_attributes setValue:value forKey:key];
     
@@ -548,6 +548,8 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
     {
         [_changedAttributes setValue:value forKey:key];
     }
+    
+    [oldValue release];
 }
 
 @end
