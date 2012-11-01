@@ -22,9 +22,7 @@
     
     NSMutableString *resultStr = [NSMutableString stringWithFormat:@"%@%@", firstLetter, remainder];
     
-    NSRegularExpression *charactersToConvertRegEx = [NSRegularExpression regularExpressionWithPattern:@"([_-])([a-zA-Z\\d])"
-                                                                                              options:0
-                                                                                                error:NULL];
+    NSRegularExpression *charactersToConvertRegEx = [self underscoreDashRegEx];
     
     __block NSInteger rangeOffset = 0;
     [charactersToConvertRegEx enumerateMatchesInString:resultStr
@@ -47,14 +45,22 @@
     return resultStr;
 }
 
+- (NSRegularExpression *)underscoreDashRegEx
+{
+    static NSRegularExpression *underscoreDashRegEx = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        underscoreDashRegEx = [[NSRegularExpression alloc] initWithPattern:@"([_-])([a-zA-Z\\d])" options:0 error:NULL];
+    });
+    
+    return underscoreDashRegEx;
+}
+
 - (NSString *)underscoredString
 {
-    NSRegularExpression *doubleUppercaseRegEx = [NSRegularExpression regularExpressionWithPattern:@"([A-Z]+)([A-Z][a-z])"
-                                                                                          options:0
-                                                                                            error:NULL];
-    NSRegularExpression *uppercaseRegEx = [NSRegularExpression regularExpressionWithPattern:@"([a-z\\d])([A-Z])"
-                                                                                    options:0
-                                                                                      error:NULL];
+    NSRegularExpression *doubleUppercaseRegEx = [self doubleUppercaseRegEx];
+    NSRegularExpression *uppercaseRegEx = [self uppercaseRegEx];
     
     NSString *result = nil;
     
@@ -62,6 +68,30 @@
     result = [uppercaseRegEx stringByReplacingMatchesInString:result options:0 range:NSMakeRange(0, result.length) withTemplate:@"$1_$2"];
     
     return [result lowercaseString];
+}
+
+- (NSRegularExpression *)doubleUppercaseRegEx
+{
+    static NSRegularExpression *doubleUppercaseRegEx = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        doubleUppercaseRegEx = [[NSRegularExpression alloc] initWithPattern:@"([A-Z]+)([A-Z][a-z])" options:0 error:NULL];
+    });
+    
+    return doubleUppercaseRegEx;
+}
+
+- (NSRegularExpression *)uppercaseRegEx
+{
+    static NSRegularExpression *uppercaseRegEx = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        uppercaseRegEx = [[NSRegularExpression alloc] initWithPattern:@"([a-z\\d])([A-Z])" options:0 error:NULL];
+    });
+    
+    return uppercaseRegEx;
 }
 
 @end
