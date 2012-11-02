@@ -54,7 +54,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"%@ (%@)", self.name, self.type];
+    return [NSString stringWithFormat:@"%@ (%u)", self.name, self.type];
 }
 
 @end
