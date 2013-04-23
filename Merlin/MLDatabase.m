@@ -41,7 +41,7 @@ static NSMutableDictionary *connectionMap;
 + (MLDatabase *)databaseWithPath:(NSString *)pathToDatabase reuseConnection:(BOOL)reuseConnection
 {
     MLDatabase *newDatabase = [[MLDatabase alloc] initWithPath:pathToDatabase];
-    return [newDatabase autorelease];
+    return newDatabase;
 }
 
 - (id)initWithPath:(NSString *)pathToDatabase
@@ -59,8 +59,7 @@ static NSMutableDictionary *connectionMap;
     if (reuseConnection && db != nil)
     {
         // If so, reuse it.
-        [self release];
-        self = [db retain];
+        self = db;
     }
     else if ((self = [super init]))
     {
@@ -69,7 +68,6 @@ static NSMutableDictionary *connectionMap;
         if (sqlite3_open([pathToDatabase UTF8String], &_database) != SQLITE_OK)
         {
             NSLog(@"Failed to open database at '%@'", pathToDatabase);
-            [self release];
             self = nil;
         }
         else if (db == nil)
@@ -89,7 +87,6 @@ static NSMutableDictionary *connectionMap;
         sqlite3_close(_database);
     }
     
-    [super dealloc];
 }
 
 

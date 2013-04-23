@@ -24,7 +24,7 @@
                                                   name:aName
                                                   type:aType
                                             allowsNull:shouldAllowNull];
-    return [newColumn autorelease];
+    return newColumn;
 }
 
 - (id)initWithId:(NSInteger)aColumnId
@@ -45,12 +45,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [_name release];
-    
-    [super dealloc];
-}
 
 - (NSString *)description
 {
