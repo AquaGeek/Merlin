@@ -25,12 +25,6 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue);
     NSMutableDictionary *_changedAttributes;
 }
 
-+ (void)injectColumnProperties:(NSArray *)columns;
-
-- (BOOL)createOrUpdate;
-- (BOOL)update;
-- (BOOL)create;
-
 @end
 
 
@@ -39,7 +33,6 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue);
 @implementation MLBase
 
 @dynamic id;
-@synthesize newRecord = _newRecord;
 
 #pragma mark Config/setup
 
@@ -287,7 +280,7 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
         fetchedObject = matchingObject;
     }];
     
-    return [fetchedObject autorelease];
+    return fetchedObject;
 }
 
 + (MLBase *)last
@@ -340,7 +333,6 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
         MLBase *obj = [[self alloc] initWithAttributes:objAttrs];
         obj.newRecord = NO;
         block(obj);
-        [obj release];
     }];
 }
 
@@ -368,13 +360,6 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
     return self;
 }
 
-- (void)dealloc
-{
-    [_attributes release];
-    [_changedAttributes release];
-    
-    [super dealloc];
-}
 
 
 #pragma mark -
@@ -540,7 +525,7 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
 
 - (void)setPrimitiveValue:(id)value forKey:(NSString *)key
 {
-    id oldValue = [[_attributes valueForKey:key] retain];
+    id oldValue = [_attributes valueForKey:key];
     
     [_attributes setValue:value forKey:key];
     
@@ -549,7 +534,6 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue)
         [_changedAttributes setValue:value forKey:key];
     }
     
-    [oldValue release];
 }
 
 @end

@@ -18,7 +18,7 @@ typedef enum {
  */
 @interface MLBase : NSObject
 
-@property (nonatomic, retain) NSNumber *id;
+@property (nonatomic, strong) NSNumber *id;
 @property (nonatomic, assign, getter = isNewRecord) BOOL newRecord;
 
 /*!
