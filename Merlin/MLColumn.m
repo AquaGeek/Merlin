@@ -10,11 +10,6 @@
 
 @implementation MLColumn
 
-@synthesize columnId = _columnId;
-@synthesize name = _name;
-@synthesize type = _type;
-@synthesize allowsNull = _allowsNull;
-
 + (MLColumn *)columnWithId:(NSInteger)aColumnId
                       name:(NSString *)aName
                       type:(SQLiteColumnType)aType
@@ -44,7 +39,6 @@
     
     return self;
 }
-
 
 - (NSString *)description
 {

@@ -8,20 +8,13 @@
 
 #import "MLDatabase.h"
 
-@interface MLDatabase()
+static NSMutableDictionary *connectionMap;
+
+@implementation MLDatabase
 {
 @private
     NSString *_databasePath;
 }
-
-@end
-
-
-#pragma mark -
-
-static NSMutableDictionary *connectionMap;
-
-@implementation MLDatabase
 
 @synthesize database = _database;
 
@@ -86,7 +79,6 @@ static NSMutableDictionary *connectionMap;
     {
         sqlite3_close(_database);
     }
-    
 }
 
 

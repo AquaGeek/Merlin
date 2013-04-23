@@ -25,12 +25,6 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue);
     NSMutableDictionary *_changedAttributes;
 }
 
-+ (void)injectColumnProperties:(NSArray *)columns;
-
-- (BOOL)createOrUpdate;
-- (BOOL)update;
-- (BOOL)create;
-
 @end
 
 
@@ -39,7 +33,6 @@ void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue);
 @implementation MLBase
 
 @dynamic id;
-@synthesize newRecord = _newRecord;
 
 #pragma mark Config/setup
 
