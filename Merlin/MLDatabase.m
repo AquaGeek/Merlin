@@ -16,8 +16,6 @@ static NSMutableDictionary *connectionMap;
     NSString *_databasePath;
 }
 
-@synthesize database = _database;
-
 + (void)initialize
 {
     if (self == [MLDatabase class])

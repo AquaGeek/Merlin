@@ -18,19 +18,12 @@
 id getSQLiteAttributeIMP(MLBase *self, SEL _cmd);
 void setSQLiteAttributeIMP(MLBase *self, SEL _cmd, id newValue);
 
-@interface MLBase()
+@implementation MLBase
 {
 @private
     NSMutableDictionary *_attributes;
     NSMutableDictionary *_changedAttributes;
 }
-
-@end
-
-
-#pragma mark -
-
-@implementation MLBase
 
 @dynamic id;
 
